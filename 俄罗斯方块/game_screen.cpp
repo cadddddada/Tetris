@@ -29,7 +29,6 @@ bool game_screen()
     uniform_int_distribution<int> sh(0, 6);
     uniform_int_distribution<int> st(0, 3);
     e.seed(time(0));
-    sh2 = sh(e), st2 = st(e);
 
     while(1)
     {
