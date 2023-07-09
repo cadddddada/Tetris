@@ -4,12 +4,6 @@ using namespace std;
 #define ERROR 0
 #define OK 1
 
-
-
-
-
-
-
 int time_dog(int &x, int y, int shapenum, int style)
 {
     if (check(x + 1, y, shapenum, style))
@@ -18,7 +12,6 @@ int time_dog(int &x, int y, int shapenum, int style)
         return false;
     return true;
 }
-
 
 bool game_screen()
 {
@@ -29,14 +22,14 @@ bool game_screen()
     int hard_tip=1;//难度计时器（不可重复初始化）
     int shapenum;//图形序号 0~6
     int style;//图形状态 0~3
-    int sh2 = 1, st2 = 0;//下一个图形信息
+    int sh2, st2;//下一个图形信息
 
 
     default_random_engine e;
     uniform_int_distribution<int> sh(0, 6);
     uniform_int_distribution<int> st(0, 3);
     e.seed(time(0));
-
+    sh2 = sh(e), st2 = st(e);
 
     while(1)
     {
