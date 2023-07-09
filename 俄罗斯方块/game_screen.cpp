@@ -35,7 +35,7 @@ bool game_screen()
         x = 0, y = 7, dog_tip = 1, press_tip = 0;//初始化
         shapenum = sh2, style = st2;
         sh2 = sh(e), st2 = st(e);//随机生成图案
-
+        sh2 = sh(e), st2 = st(e);//随机生成图案
         while (1)
         {
             dispose_shape(x, y, shapenum, style, 0);//清除上一步产生的图形
