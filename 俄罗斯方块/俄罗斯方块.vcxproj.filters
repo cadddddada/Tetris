@@ -45,10 +45,16 @@
     <ClCompile Include="map_processing.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="archive\源.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header.h">
       <Filter>头文件</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C++.gitignore" />
   </ItemGroup>
 </Project>
