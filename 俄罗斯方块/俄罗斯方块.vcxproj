@@ -132,7 +132,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="archieve_screen.cpp" />
-    <ClCompile Include="archive\源.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="end_screen.cpp" />
     <ClCompile Include="map_processing.cpp" />
@@ -147,7 +146,7 @@
     <ClInclude Include="header.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C++.gitignore" />
+    <None Include="VisualStudio.gitignore" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
