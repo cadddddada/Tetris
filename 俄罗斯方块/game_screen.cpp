@@ -29,12 +29,12 @@ bool game_screen()
     uniform_int_distribution<int> sh(0, 6);
     uniform_int_distribution<int> st(0, 3);
     e.seed(time(0));
+    sh2 = sh(e), st2 = st(e);
 
     while(1)
     {
         x = 0, y = 7, dog_tip = 1, press_tip = 0;//初始化
         shapenum = sh2, style = st2;
-        sh2 = sh(e), st2 = st(e);//随机生成图案
         sh2 = sh(e), st2 = st(e);//随机生成图案
         while (1)
         {
