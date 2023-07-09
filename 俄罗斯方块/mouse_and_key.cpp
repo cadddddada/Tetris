@@ -1,6 +1,6 @@
-#include "header.h"
+ï»¿#include "header.h"
 
-//Í¨ÓÃ²Ù×÷¸ù¾İstyle¾ö¶¨µÄ²»Í¬·µ»ØÖµ
+//é€šç”¨æ“ä½œæ ¹æ®styleå†³å®šçš„ä¸åŒè¿”å›å€¼
 int return_elem[3][3] = { {1,2,0},{1,1,0},{1,0,0} };
 
 int general_operate_identify(int x,int y,int style)
@@ -9,7 +9,7 @@ int general_operate_identify(int x,int y,int style)
     ExMessage msg;
     while(1)
     {
-        if(peekmessage(&msg, EM_MOUSE | EM_KEY))//ÓĞÊó±êÏûÏ¢·µ»ØÕæ£¬Ã»ÓĞ·µ»Ø¼Ù
+        if(peekmessage(&msg, EM_MOUSE | EM_KEY))//æœ‰é¼ æ ‡æ¶ˆæ¯è¿”å›çœŸï¼Œæ²¡æœ‰è¿”å›å‡
         {
             switch(msg.message)
             {
@@ -26,10 +26,10 @@ int general_operate_identify(int x,int y,int style)
                 }
                 break;
             case WM_RBUTTONDOWN:
-                //ÓÒ¼ü£¬Ôİ²»ÉèÖÃ¹¦ÄÜ
+                //å³é”®ï¼Œæš‚ä¸è®¾ç½®åŠŸèƒ½
                 break;
             case WM_KEYDOWN:
-                if(GetAsyncKeyState(VK_ESCAPE))//°´ÏÂESC¼ü
+                if(GetAsyncKeyState(VK_ESCAPE))//æŒ‰ä¸‹ESCé”®
                     return return_elem[style][2];
             default:
                 break;
@@ -44,12 +44,12 @@ int arch_operate_identify(int x,int y)
     ExMessage msg;
     while(1)
     {
-        if(peekmessage(&msg, EM_MOUSE | EM_KEY))//ÓĞÊó±êÏûÏ¢·µ»ØÕæ£¬Ã»ÓĞ·µ»Ø¼Ù
+        if(peekmessage(&msg, EM_MOUSE | EM_KEY))//æœ‰é¼ æ ‡æ¶ˆæ¯è¿”å›çœŸï¼Œæ²¡æœ‰è¿”å›å‡
         {
             switch(msg.message)
             {
             case WM_LBUTTONDOWN:
-                for(int i = 0; i < 6; i++)
+                for(int i = 0; i <= score_elem_len; i++)
                 {
                     if(msg.x >= x + elem_axis[i].first && msg.x <= x + elem_axis[i].first + 150 && msg.y >= y + elem_axis[i].second && msg.y <= y + elem_axis[i].second + 40)
                     {
@@ -66,16 +66,17 @@ int arch_operate_identify(int x,int y)
                         remove("archive/list.txt");
                         remove("archive/score.txt");
                         archive_processing(x, y);
+                        arch_scr(x,y);
                         break;
                     }
                 }
                 break;
             case WM_RBUTTONDOWN:
-                //ÓÒ¼ü£¬Ôİ²»ÉèÖÃ¹¦ÄÜ
+                //å³é”®ï¼Œæš‚ä¸è®¾ç½®åŠŸèƒ½
                 break;
             case WM_KEYDOWN:
                 if(GetAsyncKeyState(VK_ESCAPE))//msg.vkcode == VK_ESCAPE
-                    return 0;	// °´ ESC ¼ü»Øµ½ÓÎÏ·½çÃæ
+                    return 0;	// æŒ‰ ESC é”®å›åˆ°æ¸¸æˆç•Œé¢
             default:
                 break;
             }
@@ -88,28 +89,28 @@ int Key_presses(int& x, int& y, int shapenum, int& style, int& tip)
     int stx = x, sty = y, sts = style;
     flushmessage(EM_KEY);
 
-    if(GetAsyncKeyState(VK_UP))//ÉÏ¼ü
+    if(GetAsyncKeyState(VK_UP))//ä¸Šé”®
     {
         sts++;
         sts = sts % 4;
     }
-    if(GetAsyncKeyState(VK_DOWN) & 0x8000)//ÏÂ¼ü
+    if(GetAsyncKeyState(VK_DOWN) & 0x8000)//ä¸‹é”®
     {
         tip = 1;
     }
-    if(GetAsyncKeyState(VK_LEFT))//×ó¼ü
+    if(GetAsyncKeyState(VK_LEFT))//å·¦é”®
     {
         sty -= 1;
     }
-    if(GetAsyncKeyState(VK_RIGHT))//ÓÒ¼ü
+    if(GetAsyncKeyState(VK_RIGHT))//å³é”®
     {
         sty += 1;
     }
     if(check(stx, sty, shapenum, sts))
         x = stx, y = sty, style = sts;
-    if(GetAsyncKeyState(VK_ESCAPE) & 0x8000)//ESC¼ü
+    if(GetAsyncKeyState(VK_ESCAPE) & 0x8000)//ESCé”®
     {
-        return 1;//ÓÉÓÎÏ·½çÃæµ÷ÓÃÔİÍ£½çÃæ£¬¸ù¾İÔİÍ£½çÃæµÄreturn½øÒ»²½´¦ÀíÇëÇó
+        return 1;//ç”±æ¸¸æˆç•Œé¢è°ƒç”¨æš‚åœç•Œé¢ï¼Œæ ¹æ®æš‚åœç•Œé¢çš„returnè¿›ä¸€æ­¥å¤„ç†è¯·æ±‚
     }
     return 0;
 }
