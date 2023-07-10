@@ -50,7 +50,7 @@ void archiving();
 //打印组件
 void button(int x, int y, int w, int h, const char* ch);
 void arch_scr(int x, int y);
-void general_scr(int x, int y,int style);
+void general1_scr(int x, int y,int style);
 void mode_scr(int x, int y);
 void draw_map(int x, int y, int user);
 void draw_small_windows(int x, int y, int shapenum, int style);

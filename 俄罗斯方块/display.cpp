@@ -40,8 +40,8 @@ void arch_scr(int x, int y)
     if(score_elem_len != -1) button(x + 200, y + 275, 100, 28, "清空存档");
 }
 
-//通用打印程序
-void general_scr(int x, int y,int style)
+//通用打印程序1
+void general1_scr(int x, int y,int style)
 {
     string headline[3] = { "俄罗斯方块" ,"暂停" ,"结束" };
     string top_prompt[3] = { "","当前分数：00分" ,"当前分数：00分"};
@@ -66,7 +66,7 @@ void general_scr(int x, int y,int style)
     outtextxy(x + (500 - textwidth(bottom_prompt[style].c_str())) / 2, y + 285, _T(bottom_prompt[style].c_str()));
 }
 
-//模式界面打印程序
+//通用打印程序2
 void mode_scr(int x, int y)
 {
     cleardevice();
@@ -157,7 +157,7 @@ void draw_fraction(int x, int y,int user)
 
 }
 
-//
+//双人模式结果判定输出程序
 void Two_player_win_display(int x,int y,int fra2,int fra1)//user is win, (x,y) is first(x,y)
 {
     string out_elem[3][2] = { "你赢了" ,"你输了" ,"你输了" ,"你赢了" ,"平 局","平 局" };

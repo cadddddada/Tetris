@@ -29,7 +29,7 @@ int general_operate_identify(int x,int y,int style)
                 //右键，暂不设置功能
                 break;
             case WM_KEYDOWN:
-                if(GetAsyncKeyState(VK_ESCAPE))//按下ESC键
+                if(GetAsyncKeyState(VK_ESCAPE) & 0x8000)//按下ESC键
                     return return_elem[style][2];
             default:
                 break;
@@ -75,8 +75,8 @@ int arch_operate_identify(int x,int y)
                 //右键，暂不设置功能
                 break;
             case WM_KEYDOWN:
-                if(GetAsyncKeyState(VK_ESCAPE))//msg.vkcode == VK_ESCAPE
-                    return 0;	// 按 ESC 键回到游戏界面
+                if(GetAsyncKeyState(VK_ESCAPE) & 0x8000)//msg.vkcode == VK_ESCAPE
+                    return 0;	
             default:
                 break;
             }
@@ -112,7 +112,7 @@ int mode_operate_identify(int x, int y)
                 //右键，暂不设置功能
                 break;
             case WM_KEYDOWN:
-                if(GetAsyncKeyState(VK_ESCAPE))//按下ESC键
+                if(GetAsyncKeyState(VK_ESCAPE) & 0x8000)//按下ESC键
                     return 0;
             default:
                 break;
@@ -158,7 +158,7 @@ int Key_presses(int x[], int y[], int shapenum[], int style[], int tip[], int ti
     if(check(stx0, sty0, shapenum[0], sts0, 0))
         x[0] = stx0, y[0] = sty0, style[0] = sts0;
 
-    if((GetAsyncKeyState('W') & 0x8000) && !time)//W键
+    if((GetAsyncKeyState('W') & 0x8000) && !time)//W键 !time用于减少扫描次数
     {
         sts1++;
         sts1 = sts1 % 4;
@@ -178,7 +178,7 @@ int Key_presses(int x[], int y[], int shapenum[], int style[], int tip[], int ti
     if(check(stx1, sty1, shapenum[1], sts1, 1))
         x[1] = stx1, y[1] = sty1, style[1] = sts1;
 
-    if(GetAsyncKeyState(VK_ESCAPE) & 0x8000)//ESC键
+    if((GetAsyncKeyState(VK_ESCAPE) & 0x8000) && !time)//ESC键
     {
         return 1;//由游戏界面调用暂停界面，根据暂停界面的return进一步处理请求
     }
