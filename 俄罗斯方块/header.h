@@ -13,8 +13,8 @@ using namespace std;
 #define _CRT_SECURE_NO_WARNINGS
 
 //全局参数
-extern int mapp[31][16];
-extern int fraction;
+extern int mapp[2][31][16];
+extern int fraction[2];
 extern int hard_num;
 extern int max_score;
 
@@ -37,9 +37,10 @@ const int color_elem[8][3] = {
 //游戏界面
 int start_screen(int x, int y);
 int archive_screen(int x, int y);
-bool game_screen();
+bool game_screen(int mode);
 bool stop_screen(int x, int y);
 bool end_screen(int x, int y);
+int mode_screen();
 
 //from game_set
 bool set_map(int style);
@@ -50,23 +51,28 @@ void archiving();
 void button(int x, int y, int w, int h, const char* ch);
 void arch_scr(int x, int y);
 void general_scr(int x, int y,int style);
-void draw_map(int x, int y);
+void mode_scr(int x, int y);
+void draw_map(int x, int y, int user);
 void draw_small_windows(int x, int y, int shapenum, int style);
-void draw_fraction(int x, int y);
+void draw_fraction(int x, int y, int user);
+void Two_player_win_display(int x, int y, int fra1, int fra2);
 
 //鼠标与键盘识别组件
 int general_operate_identify(int x,int y,int style);
 int arch_operate_identify(int x,int y);
-int Key_presses(int& x, int& y, int shapenum, int& style, int& tip);
+int mode_operate_identify(int x, int y);
+int Key_presses(int x[], int y[], int shapenum[], int style[], int tip[], int time, int mode);
 
 //地图数组处理组件
 bool boundary_check(int x, int y, pair<int, int> stmp);
-bool check(int x, int y, int shapenum, int style);
-void del_line(int x);
-int line_check();
-bool end_check();
-void dispose_shape(int x, int y, int shapenum, int style, bool tip);
+bool check(int x, int y, int shapenum, int style, int user);
+void del_line(int x, int user);
+int line_check(int user);
+bool end_check(int user);
+void dispose_shape(int x, int y, int shapenum, int style, bool tip, int user);
 
 void archive_processing(int x, int y);
+
+//随机种子
 
 #endif

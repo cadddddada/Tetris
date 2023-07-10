@@ -1,8 +1,8 @@
 ﻿#include"header.h"
 using namespace std;
 
-int mapp[31][16];
-int fraction;
+int mapp[2][31][16];
+int fraction[2];
 int hard_num;
 int max_score;
 
@@ -21,7 +21,7 @@ bool set_map(int style)//初始化游戏地图，style=-1 means new game, style=
 			CreateDirectory("archive", NULL);
 			//system("mkdir archive"); 不使用此函数是因为创建失败时会显示报错信息
 
-			fraction = 0;
+			fraction[0] =fraction[1]= 0;
 			hard_num = 1;
 			memset(mapp, 0, sizeof mapp);//初始化地图为0
 			return true;
@@ -32,10 +32,11 @@ bool set_map(int style)//初始化游戏地图，style=-1 means new game, style=
 			ch[8] = style + '0';
 			ifstream maptxt;
 			maptxt.open(ch);
-			maptxt >> fraction >> hard_num;
-			for(int i = 0; i < 30; i++)
-				for(int j = 0; j < 15; j++)
-					maptxt >> mapp[i][j];
+			maptxt >> fraction[0] >>fraction[1]>> hard_num;
+			for(int k = 0; k < 2; k++)
+				for(int i = 0; i < 30; i++)
+					for(int j = 0; j < 15; j++)
+						maptxt >> mapp[k][i][j];
 			return true;
 		}
 	}
@@ -44,31 +45,31 @@ bool set_map(int style)//初始化游戏地图，style=-1 means new game, style=
 
 void store_score()//存储最高分
 {
-	if(fraction > max_score)
+	if(max(fraction[0], fraction[1]) > max_score)
 	{
 		ofstream score_list;
 		score_list.open("archive/score.txt");
-		score_list << fraction << endl;
+		score_list << max(fraction[0], fraction[1]) << endl;
 	}
 }
 
 void archiving()//保存游戏记录
 {
-	int stmp=0,str;
-	
+	int stmp = 0, str;
+
 	store_score();
 
 	//选择未使用的stmp标记
 	ifstream archive_list;
 	archive_list.open("archive/list.txt");
-	while(archive_list >> stmp>>str);
+	while(archive_list >> stmp >> str);
 	archive_list.close();
 	stmp++;
 
 	//将新文件名与分数写入目录
 	ofstream achive_list;
 	achive_list.open("archive/list.txt", ios::app);
-	achive_list << stmp << " " << fraction << endl;
+	achive_list << stmp << " " << max(fraction[0], fraction[1]) << endl;
 	archive_list.close();
 
 	//创建新txt记录
@@ -76,12 +77,13 @@ void archiving()//保存游戏记录
 	ch[8] = stmp + '0';
 	ofstream maptxt;
 	maptxt.open(ch);
-	maptxt << fraction <<" "<< hard_num<<endl;
-	for(int i = 0; i < 30; i++)
-	{
-		for(int j = 0; j < 15; j++)
-			maptxt << mapp[i][j] << " ";
-		maptxt << endl;
-	}
+	maptxt << fraction[0] <<" "<<fraction[1]<<" "<< hard_num << endl;
+	for(int k = 0; k < 2; k++)
+		for(int i = 0; i < 30; i++)
+		{
+			for(int j = 0; j < 15; j++)
+				maptxt << mapp[k][i][j] << " ";
+			maptxt << endl;
+		}
 	maptxt.close();
 }

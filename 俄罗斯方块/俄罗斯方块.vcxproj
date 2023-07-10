@@ -135,6 +135,7 @@
     <ClCompile Include="display.cpp" />
     <ClCompile Include="end_screen.cpp" />
     <ClCompile Include="map_processing.cpp" />
+    <ClCompile Include="mode_screen.cpp" />
     <ClCompile Include="mouse_and_key.cpp" />
     <ClCompile Include="stop_screen.cpp" />
     <ClCompile Include="game_set.cpp" />
