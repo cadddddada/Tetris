@@ -81,12 +81,12 @@ bool game_screen(int mode)//mode1 经典模式 mode2 随机旋转模式 mode 3 �
 						do
 						{
 							flushmessage(EM_MOUSE);
-							int stmp = end_screen(400, 244,mode);//根据结束界面return值进行return，由主程序处理请求
+							int stmp = end_screen(400, 244,mode);
 							if(stmp == 2)//选择复活
 								tmp_res=resurrection(400, 244);
 							else
 							{
-								resurrection_coin += max(fraction[0], fraction[1]);//根据游戏分数获取游戏币
+								resurrection_coin += max(fraction[0], fraction[1]);//根据游戏分数获取复活币
 								store_score();//存储
 								return stmp;
 							}
@@ -125,7 +125,7 @@ bool game_screen(int mode)//mode1 经典模式 mode2 随机旋转模式 mode 3 �
 		EndBatchDraw();
 		//绘图区域结束
 
-		Sleep(8);//时间分度为10ms
+		Sleep(8);//时间分度为8ms
 
 	}
 	return 0;

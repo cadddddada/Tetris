@@ -86,5 +86,4 @@ void read_score_txt();
 //存档加载组件
 void archive_processing(int x, int y);
 
-
 #endif

@@ -73,12 +73,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\opencv\build\include\opencv2;D:\opencv\build\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\opencv\build\x64\vc16\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\opencv\build\include\opencv2;D:\opencv\build\include;D:\curl\libcurl-vc15-x64-debug-static-ipv6-sspi-schannel\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\opencv\build\x64\vc16\lib;D:\curl\libcurl-vc15-x64-debug-static-ipv6-sspi-schannel\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>D:\opencv\build\include\opencv2;D:\opencv\build\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\opencv\build\x64\vc16\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\opencv\build\include\opencv2;D:\opencv\build\include;D:\curl\libcurl-vc15-x64-release-static-ipv6-sspi-schannel\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\opencv\build\x64\vc16\lib;D:\curl\libcurl-vc15-x64-release-static-ipv6-sspi-schannel\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -119,7 +119,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_world480.lib;opencv_world480d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,7 +137,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_world480.lib;opencv_world480d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -193,22 +193,24 @@ void ad_scr(int x, int y)//此坐标为中心坐标
     int x0 = x - w / 2, y0 = y - h / 2;//左上角原点坐标
     setlinecolor(TRANSPARENT);
     setfillcolor(BLACK);
-    fillrectangle(x - 260, y0 - 160, x+260, y+160);
+    fillrectangle(x - 260, y - 160, x+260, y+160);
     setlinecolor(WHITE);
     rectangle(x0 - 5, y0 - 5, x0 + w + 5, y0 + h + 5);
     int tmp = 0,time=0;
     IMAGE ad_image;
-    string time_out = "广告 0";
+    string time_out = "广告 ";
     setlinecolor(TRANSPARENT);
-    while(time<5000)
+    int ad_time = 12000;//设定广告显示时间(ms)
+    while(time<ad_time)
     {
         loadimage(&ad_image, elem[tmp% elem.size()].c_str(), w, h);
         tmp++,time+=120;
         putimage(x0, y0, &ad_image);
         setfillcolor(BROWN);
-        fillrectangle(x0, y0, x0+34, y0+14);
-        time_out[time_out.size() - 1] = (5000 - time) / 1000 + 1 + '0';
+        time_out = "广告 ";
+        time_out += to_string((ad_time - time) / 1000);
         settextstyle(10, 0, "mplus_hzk_12");
+        fillrectangle(x0, y0, x0 + textwidth(time_out.c_str())+4, y0 + 14);
         outtextxy(x0 + 2, y0 + 2, _T(time_out.c_str()));
         Sleep(120);
     }
