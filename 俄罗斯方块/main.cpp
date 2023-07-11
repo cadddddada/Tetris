@@ -5,6 +5,8 @@ using namespace std;
 int main()
 {
 	initgraph(1300, 800);
+	HWND hWnd = GetHWnd();
+	MoveWindow(hWnd, (GetSystemMetrics(SM_CXSCREEN) - 1300) / 2, (GetSystemMetrics(SM_CYSCREEN)-800)/2, 1300, 800, 0);
 	int tip = 0;//程序运行标记
 	while(1)
 	{
@@ -25,6 +27,8 @@ int main()
 			else
 				tip = 0;
 			break;
+		case 3:
+
 		default:
 			break;
 		}

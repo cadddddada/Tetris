@@ -2,7 +2,7 @@
 
 int mode_screen()
 {
-	mode_scr(400, 244);
+	general2_scr(400, 244,0);
 
-	return mode_operate_identify(400, 244);
+	return general2_operate_identify(400, 244,0);
 }

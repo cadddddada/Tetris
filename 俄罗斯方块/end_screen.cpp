@@ -1,10 +1,18 @@
 ﻿#include "header.h"
 
-bool end_screen(int x,int y)
+int end_screen(int x,int y,int mode_t)
 {
-    general1_scr(x,y,2);//调用打印程序
+    int stmp;
+    if(mode_t==3)
+    {
+        stmp = 2;
+    }
+    else
+    {
+        stmp = 1;
+    }
 
+    general2_scr(x, y, stmp);//调用打印程序
     Sleep(100);
-    
-    return general_operate_identify(x,y,2);//识别操作并返回
+    return general2_operate_identify(x,y,stmp);//识别操作并返回
 }

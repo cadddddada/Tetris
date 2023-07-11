@@ -63,3 +63,48 @@ void dispose_shape(int x, int y, int shapenum, int style, bool tip,int user)//ti
         mapp[user][x + stmp.first][y + stmp.second] = (shapenum + 1) * tip;
     }
 }
+
+//复活程序
+bool resurrection(int x,int y)
+{
+    int tmp_map[2][16][16] = { 0 };
+    int stmp = 0,n=8;
+    if(resurrection_coin >= 5)
+    {
+        resurrection_coin -= 5;
+        store_score();
+        memcpy(tmp_map[0], mapp[0], (sizeof tmp_map) / 2);
+        while(n--)
+        {
+            memcpy(mapp[0], tmp_map[stmp], (sizeof tmp_map)/2);
+
+            if(stmp)
+                stmp = 0;
+            else
+                stmp = 1;
+            //绘图区域
+			BeginBatchDraw();
+
+			cleardevice();
+			draw_map(100, 100 + 325, 0);
+			draw_small_windows(100, 450 + 325, -1, 0);//不打印下一个图形
+			draw_fraction(450 + 325, 300, 0);
+
+			EndBatchDraw();
+            //绘图区域结束
+
+            Sleep(500);
+            
+        }
+
+        return true;
+    }
+    else
+    {
+        error_scr(x, y);
+
+        Sleep(1000);
+        return false;
+    }
+    
+}

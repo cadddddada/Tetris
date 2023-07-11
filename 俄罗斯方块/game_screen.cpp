@@ -9,10 +9,10 @@ int shapenum[2];//图形序号 0~6
 int style[2];//图形状态 0~3
 int sh2[2], st2[2];//下一个图形信息
 
-
 default_random_engine et;
 uniform_int_distribution<int> sh(0, 6);
 uniform_int_distribution<int> st(0, 3);
+uniform_int_distribution<int> sk(-40, 40);
 
 
 int time_dog(int& x, int y, int shapenum, int style, int user)
@@ -61,21 +61,36 @@ bool game_screen(int mode)//mode1 经典模式 mode2 随机旋转模式 mode 3 �
 		}
 		for(int con = 0; con < control; con++)
 		{
-			if(!(++dog_tip[con] % (33 - hard_num * 3)) || press_tip[con] == 1)//判定下落
+			if(mode==2&& dog_tip[con]%(100+sk(et))==0)//模式2 随机旋转
 			{
-				dog_tip[con] = 1;
-				if(!time_dog(x[con], y[con], shapenum[con], style[con], con))//下落失败，图形触底
+				if(check(x[con], y[con], shapenum[con], (style[con] + 1) % 4, con))
+				style[con]++;
+					style[con] %= 4;
+			}
+			if(!(++dog_tip[con] % (int)(33 - hard_num * 2.5)) || press_tip[con] == 1)//判定下落
+			{				if(!time_dog(x[con], y[con], shapenum[con], style[con], con))//下落失败，图形触底
 				{
 					dispose_shape(x[con], y[con], shapenum[con], style[con], 1, con);
 					fraction[con] += line_check(con);//清除线判定
 					hard_tip[con]++;
 					if(end_check(con))//游戏结束
 					{
-						store_score();
 						if(mode == 3)
 							Two_player_win_display(100, 100, fraction[0] , fraction[1]);
-
-						return end_screen(400, 244);//根据结束界面return值进行return，由主程序处理请求
+						int tmp_res;
+						do
+						{
+							flushmessage(EM_MOUSE);
+							int stmp = end_screen(400, 244,mode);//根据结束界面return值进行return，由主程序处理请求
+							if(stmp == 2)//选择复活
+								tmp_res=resurrection(400, 244);
+							else
+							{
+								resurrection_coin += max(fraction[0], fraction[1]);//根据游戏分数获取游戏币
+								store_score();//存储
+								return stmp;
+							}
+						} while(!tmp_res);
 					}
 					initialization_parameters(con);
 				}
@@ -97,14 +112,14 @@ bool game_screen(int mode)//mode1 经典模式 mode2 随机旋转模式 mode 3 �
 		{
 			draw_map(100, 100 + 325, 0);
 			draw_small_windows(100, 450 + 325, sh2[0], st2[0]);
-			draw_fraction(300, 450 + 325, 0);
+			draw_fraction(450 + 325, 300, 0);
 		}
 		else
 			for(int con = 0; con < control; con++)
 			{
 				draw_map(100, 750 - 650 * con, con);
 				draw_small_windows(100, 1100 - 650 * con, sh2[con], st2[con]);
-				draw_fraction(300, 1100 - 650 * con, con);
+				draw_fraction(1100 - 650 * con, 300, con);
 			}
 
 		EndBatchDraw();

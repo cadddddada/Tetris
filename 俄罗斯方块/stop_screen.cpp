@@ -6,5 +6,5 @@ bool stop_screen(int x,int y)
 
     Sleep(500);
     
-    return general_operate_identify(x,y,1);//识别操作并返回
+    return general1_operate_identify(x,y,1);//识别操作并返回
 }
