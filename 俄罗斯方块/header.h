@@ -37,13 +37,15 @@ const int color_elem[8][3] = {
     {0,0,0}, {241, 112, 125},{172, 94, 116},{242, 222, 189},
     {241, 184, 241},{243, 215, 81},{255, 132, 68},{180, 144, 160} };
 
-//游戏界面
+//界面主控
 int start_screen(int x, int y);
 int archive_screen(int x, int y);
 bool game_screen(int mode);
 bool stop_screen(int x, int y);
 int end_screen(int x, int y, int mode_t);
 int mode_screen();
+int error_screen(int x, int y);
+int ad_screen(int x, int y);//此坐标为广告中心坐标
 
 //txt数据处理组件
 bool set_map(int style);
@@ -59,14 +61,16 @@ void general2_scr(int x, int y, int style);
 void draw_map(int x, int y, int user);
 void draw_small_windows(int x, int y, int shapenum, int style);
 void draw_fraction(int x, int y, int user);
-void Two_player_win_display(int x, int y, int fra1, int fra2);
+void Two_player_win_display(int x, int y, int user);
 void error_scr(int x, int y);
 void instructions(int x, int y);
+void ad_scr(int x, int y);//此坐标为中心坐标
 
 //鼠标与键盘识别组件
 int general1_operate_identify(int x,int y,int style);
 int arch_operate_identify(int x,int y);
 int general2_operate_identify(int x, int y,int style);
+int error_operate_identify(int x, int y);
 int Key_presses(int x[], int y[], int shapenum[], int style[], int tip[], int time, int mode);
 
 //地图数组处理组件

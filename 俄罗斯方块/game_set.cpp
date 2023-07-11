@@ -7,15 +7,6 @@ int hard_num;
 int max_score;
 int resurrection_coin;
 
-BOOL MoveWindow(
-	HWND hWnd,       // handle to window
-	int X,           // horizontal position
-	int Y,           // vertical position
-	int nWidth,      // width
-	int nHeight,     // height
-	BOOL bRepaint    // repaint option
-);
-
 void read_score_txt()
 {
 	ifstream score_list;//读取最高分

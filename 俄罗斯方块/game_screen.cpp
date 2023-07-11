@@ -76,7 +76,7 @@ bool game_screen(int mode)//mode1 经典模式 mode2 随机旋转模式 mode 3 �
 					if(end_check(con))//游戏结束
 					{
 						if(mode == 3)
-							Two_player_win_display(100, 100, fraction[0] , fraction[1]);
+							Two_player_win_display(100, 100, con);
 						int tmp_res;
 						do
 						{

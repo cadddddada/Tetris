@@ -1,0 +1,12 @@
+ad/01.png
+ad/02.png
+ad/03.png
+ad/04.png
+ad/05.png
+ad/06.png
+ad/07.png
+ad/08.png
+ad/09.png
+ad/10.png
+ad/11.png
+ad/12.png

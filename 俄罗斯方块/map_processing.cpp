@@ -69,7 +69,7 @@ bool resurrection(int x,int y)
 {
     int tmp_map[2][16][16] = { 0 };
     int stmp = 0,n=8;
-    if(resurrection_coin >= 5)
+    if(resurrection_coin >= 5|| error_screen(x, y))
     {
         resurrection_coin -= 5;
         store_score();
@@ -101,9 +101,9 @@ bool resurrection(int x,int y)
     }
     else
     {
-        error_scr(x, y);
+        
 
-        Sleep(1000);
+        //Sleep(1000);
         return false;
     }
     

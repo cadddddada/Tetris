@@ -133,6 +133,40 @@ int general2_operate_identify(int x, int y, int style)
         }
     }
 }
+
+//复活失败界面键控
+int error_operate_identify(int x, int y)
+{
+    flushmessage(EM_KEY);
+    ExMessage msg;
+    while(1)
+    {
+        if(peekmessage(&msg, EM_MOUSE | EM_KEY))//有鼠标消息返回真，没有返回假
+        {
+            switch(msg.message)
+            {
+            case WM_LBUTTONDOWN:
+                if(msg.x >= x + 150 && msg.x <= x + 150 + 200 && msg.y >= y + 184 && msg.y <= y + 184 + 40)//观看广告复活
+                {
+                    return 1;
+                }
+                else if(msg.x >= x + 150 && msg.x <= x + 150 + 200 && msg.y >= y + 244 && msg.y <= y + 244 + 40)//返回
+                {
+                    return 0;
+                }
+                break;
+            case WM_RBUTTONDOWN:
+                //右键，暂不设置功能
+                break;
+            case WM_KEYDOWN:
+                if(GetAsyncKeyState(VK_ESCAPE) & 0x8000)//按下ESC键
+                    return 0;
+            default:
+                break;
+            }
+        }
+    }
+}
 int ran_nd(int a, int b)
 {
     std::default_random_engine eq;
@@ -186,7 +220,7 @@ int Key_presses(int x[], int y[], int shapenum[], int style[], int tip[], int ti
     if(check(stx1, sty1, shapenum[1], sts1, 1))
         x[1] = stx1, y[1] = sty1, style[1] = sts1;
 
-    if((GetAsyncKeyState(VK_ESCAPE) & 0x8000) && !time)//ESC键
+    if((GetAsyncKeyState(VK_ESCAPE) & 0x8000|| GetAsyncKeyState(VK_SPACE) & 0x8000) && !time)//ESC或空格键
     {
         return 1;//由游戏界面调用暂停界面，根据暂停界面的return进一步处理请求
     }
