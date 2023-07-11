@@ -167,6 +167,19 @@ void ad_scr(int x, int y)//此坐标为中心坐标
 {
     ifstream ad_list;
     ad_list.open("ad/list.txt");
+    if(!ad_list.is_open())
+    {
+        setlinecolor(TRANSPARENT);
+        setfillcolor(BLACK);
+        fillrectangle(x - 260, y - 160, x + 260, y + 160);
+        char text_[] = "广告信息丢失！";
+        settextstyle(40, 0, "mplus_hzk_12");
+        int tx = x - textwidth(text_) / 2;
+        int ty = y - textheight(text_) / 2;
+        outtextxy(tx, ty, text_);
+        Sleep(2500);
+        return;
+    }
     vector<string> elem;
     string stmp;
     while(ad_list >> stmp)
