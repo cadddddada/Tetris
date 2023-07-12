@@ -1,6 +1,5 @@
 ﻿#ifndef HEADER_H
 #define HEADER_H
-#include<stdio.h>
 #include<graphics.h>
 #include<easyx.h>
 #include<bits/stdc++.h>

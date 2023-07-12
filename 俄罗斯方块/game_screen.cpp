@@ -68,7 +68,8 @@ bool game_screen(int mode)//mode1 经典模式 mode2 随机旋转模式 mode 3 �
 					style[con] %= 4;
 			}
 			if(!(++dog_tip[con] % (int)(33 - hard_num * 2.5)) || press_tip[con] == 1)//判定下落
-			{				if(!time_dog(x[con], y[con], shapenum[con], style[con], con))//下落失败，图形触底
+			{				
+				if(!time_dog(x[con], y[con], shapenum[con], style[con], con))//下落失败，图形触底
 				{
 					dispose_shape(x[con], y[con], shapenum[con], style[con], 1, con);
 					fraction[con] += line_check(con);//清除线判定
