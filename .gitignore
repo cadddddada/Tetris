@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/俄罗斯方块/keyviz.exe
+/俄罗斯方块/archive/list.txt
