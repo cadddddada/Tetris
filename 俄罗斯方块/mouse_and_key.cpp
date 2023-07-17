@@ -1,6 +1,7 @@
 ﻿#include "header.h"
 
-
+bool Key_presses_tip[2];
+bool Key_up_tip[2];
 
 int general1_operate_identify(int x,int y,int style)
 {
@@ -40,7 +41,10 @@ int general1_operate_identify(int x,int y,int style)
                 break;
             case WM_KEYDOWN:
                 if(GetAsyncKeyState(VK_ESCAPE) & 0x8000)//按下ESC键
+                {
+                    while(GetAsyncKeyState(VK_ESCAPE) & 0x8000);
                     return return_elem[style][3];
+                }
             default:
                 break;
             }
@@ -87,7 +91,10 @@ int arch_operate_identify(int x,int y)
                 break;
             case WM_KEYDOWN:
                 if(GetAsyncKeyState(VK_ESCAPE) & 0x8000)//msg.vkcode == VK_ESCAPE
-                    return 0;	
+                {
+                    while(GetAsyncKeyState(VK_ESCAPE) & 0x8000);
+                    return 0;
+                }
             default:
                 break;
             }
@@ -126,7 +133,10 @@ int general2_operate_identify(int x, int y, int style)
                 break;
             case WM_KEYDOWN:
                 if(GetAsyncKeyState(VK_ESCAPE) & 0x8000)//按下ESC键
+                {
+                    while(GetAsyncKeyState(VK_ESCAPE) & 0x8000);
                     return return_elem[style][3];
+                }
             default:
                 break;
             }
@@ -160,7 +170,10 @@ int error_operate_identify(int x, int y)
                 break;
             case WM_KEYDOWN:
                 if(GetAsyncKeyState(VK_ESCAPE) & 0x8000)//按下ESC键
+                {
+                    while(GetAsyncKeyState(VK_ESCAPE) & 0x8000);
                     return 0;
+                }
             default:
                 break;
             }
@@ -174,55 +187,113 @@ int ran_nd(int a, int b)
     eq.seed(time(0));
     return u(eq);
 }
-int Key_presses(int x[], int y[], int shapenum[], int style[], int tip[], int time,int mode)
+int Key_presses_use1(int x[], int y[], int shapenum[], int style[], int tip[])
 {
-    int stx0 = x[0], sty0 = y[0], sts0 = style[0],
-        stx1 = x[1], sty1 = y[1], sts1 = style[1];
+    int stx0 = x[0], sty0 = y[0], sts0 = style[0], key_stmp = 1,up_stmp=1;
     flushmessage(EM_KEY);
-    if((GetAsyncKeyState(VK_UP)) && !time)//上键
+    if(GetAsyncKeyState(VK_UP))//上键
     {
-        if(mode != 2)
+        if(!Key_up_tip[0])
+        {
             sts0++;
-        sts0 = sts0 % 4;
+            sts0 = sts0 % 4;
+        }
+        up_stmp = 0;
     }
-    if((GetAsyncKeyState(VK_DOWN) & 0x8000)&&x[0])//下键
+    if((GetAsyncKeyState(VK_DOWN) & 0x8000) && x[0])//下键
     {
-        tip[0] = 1;
+        if(!Key_presses_tip[0])
+            tip[0] = 1;
+        key_stmp = 0;
+        Key_up_tip[0] = 0;
     }
     if(GetAsyncKeyState(VK_LEFT))//左键
     {
-        sty0 -= 1;
+        if(!Key_presses_tip[0])
+            sty0 -= 1;
+        key_stmp = 0;
+        Key_up_tip[0] = 0;
     }
     if(GetAsyncKeyState(VK_RIGHT))//右键
     {
-        sty0 += 1;
+        if(!Key_presses_tip[0])
+            sty0 += 1;
+        key_stmp = 0;
+        Key_up_tip[0] = 0;
     }
+    if(key_stmp)
+        Key_presses_tip[0] = 0;
+    else
+        Key_presses_tip[0] = 1;
+    if(up_stmp)
+        Key_up_tip[0] = 0;
+    else
+        Key_up_tip[0] = 1;
+    
+
     if(check(stx0, sty0, shapenum[0], sts0, 0))
         x[0] = stx0, y[0] = sty0, style[0] = sts0;
 
-    if((GetAsyncKeyState('W') & 0x8000) && !time)//W键 !time用于减少扫描次数
+    if((GetAsyncKeyState(VK_ESCAPE) & 0x8000|| GetAsyncKeyState(VK_SPACE) & 0x8000))//ESC或空格键
     {
-        sts1++;
-        sts1 = sts1 % 4;
+        while((GetAsyncKeyState(VK_ESCAPE) & 0x8000 || GetAsyncKeyState(VK_SPACE) & 0x8000));
+        return 1;//由游戏界面调用暂停界面，根据暂停界面的return进一步处理请求
+    }
+    if(!key_stmp)//按下了按键
+        return 2;
+    else
+        return 0;
+}
+
+int Key_presses_use2(int x[], int y[], int shapenum[], int style[], int tip[])
+{
+    int stx0 = x[1], sty0 = y[1], sts0 = style[1], key_stmp = 1, up_stmp = 1;
+    flushmessage(EM_KEY);
+    if(GetAsyncKeyState('W'))//W键
+    {
+        if(!Key_up_tip[1])
+        {
+            sts0++;
+            sts0 = sts0 % 4;
+        }
+        up_stmp = 0;
     }
     if((GetAsyncKeyState('S') & 0x8000) && x[1])//S键
     {
-        tip[1] = 1;
+        if(!Key_presses_tip[1])
+            tip[1] = 1;
+        key_stmp = 0;
+        Key_up_tip[1] = 0;
     }
-    if(GetAsyncKeyState('A') & 0x8000)//A键
+    if(GetAsyncKeyState('A'))//A键
     {
-        sty1 -= 1;
+        if(!Key_presses_tip[1])
+            sty0 -= 1;
+        key_stmp = 0;
+        Key_up_tip[1] = 0;
     }
-    if(GetAsyncKeyState('D') & 0x8000)//D键
+    if(GetAsyncKeyState('D'))//D键
     {
-        sty1 += 1;
+        if(!Key_presses_tip[1])
+            sty0 += 1;
+        key_stmp = 0;
+        Key_up_tip[1] = 0;
     }
-    if(check(stx1, sty1, shapenum[1], sts1, 1))
-        x[1] = stx1, y[1] = sty1, style[1] = sts1;
+    if(key_stmp)
+        Key_presses_tip[1] = 0;
+    else
+        Key_presses_tip[1] = 1;
+    if(up_stmp)
+        Key_up_tip[1] = 0;
+    else
+        Key_up_tip[1] = 1;
 
-    if((GetAsyncKeyState(VK_ESCAPE) & 0x8000|| GetAsyncKeyState(VK_SPACE) & 0x8000) && !time)//ESC或空格键
-    {
-        return 1;//由游戏界面调用暂停界面，根据暂停界面的return进一步处理请求
-    }
-    return 0;
+
+    if(check(stx0, sty0, shapenum[1], sts0, 1))
+        x[1] = stx0, y[1] = sty0, style[1] = sts0;
+
+    if(!key_stmp)//按下了按键
+        return 2;
+    else
+        return 0;
 }

@@ -19,6 +19,5 @@ int archive_screen(int x, int y)
 {
     archive_processing(x, y);
     arch_scr(x, y);//调用打印程序
-    Sleep(100);
     return arch_operate_identify(x,y);
 }

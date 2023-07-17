@@ -19,6 +19,7 @@ extern int fraction[2];
 extern int hard_num;
 extern int max_score;
 extern int resurrection_coin;
+extern bool Key_presses_tip[2];
 
 //选择界面打印组件调用参数
 extern int score_elem_len;
@@ -70,7 +71,8 @@ int general1_operate_identify(int x,int y,int style);
 int arch_operate_identify(int x,int y);
 int general2_operate_identify(int x, int y,int style);
 int error_operate_identify(int x, int y);
-int Key_presses(int x[], int y[], int shapenum[], int style[], int tip[], int time, int mode);
+int Key_presses_use1(int x[], int y[], int shapenum[], int style[], int tip[]);
+int Key_presses_use2(int x[], int y[], int shapenum[], int style[], int tip[]);
 
 //地图数组处理组件
 bool boundary_check(int x, int y, pair<int, int> stmp);
